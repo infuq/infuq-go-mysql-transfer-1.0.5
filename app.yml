@@ -1,0 +1,39 @@
+# MySQL配置
+addr: 192.168.1.100:3306
+user: root
+pass: 9527
+charset : utf8
+slave_id: 51001
+flavor: mysql
+
+
+#目标类型
+target: mongodb
+
+mongodb_addrs: 172.21.126.201:27017
+mongodb_username: root
+mongodb_password: 9527
+
+#规则配置
+rule:
+  -
+    schema: db0
+    table: store_batch_details_log
+    order_by_column: batch_details_log_id
+    column_underscore_to_camel: true
+    lua_file_path: lua/t_batch_log.lua
+
+    mongodb_database: db1
+    mongodb_collection: batchLog
+
+  -
+    schema: db0
+    table: warehouse
+    column_underscore_to_camel: true
+    lua_file_path: lua/t_warehouse.lua
+
+    mongodb_database: db1
+    mongodb_collection: batchLog
+
+    
+    
